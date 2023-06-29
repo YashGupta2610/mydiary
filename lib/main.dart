@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:my_diary/controller/album_controller.dart';
 import 'package:my_diary/utils/appstyle.dart';
+import 'package:my_diary/views/album_module/album.dart';
 import 'package:my_diary/views/notes_module/notes.dart';
 
 import 'controller/notes_controller.dart';
@@ -14,6 +16,7 @@ Future<void> main() async {
   await GetStorage.init();
   Get.put(TabControl());
   Get.put(NotesController());
+  Get.put(AlbumController());
   runApp(const MyApp());
 }
 
@@ -63,12 +66,10 @@ class MyApp extends StatelessWidget {
               controller: ctrl.controller,
               children: [
                 NotesPage(),
-                Icon(Icons.directions_transit),
+                AlbumPage(),
               ],
             ),
           );
         }));
   }
-
-
 }
