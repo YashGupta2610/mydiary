@@ -15,7 +15,7 @@ class AlbumPage extends StatelessWidget {
           slivers: [
             SliverAppBar(
               title: Text(
-                "Happy ",
+                "Happy Birthday🎉",
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.clip,
@@ -54,10 +54,9 @@ class AlbumPage extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 child: CachedNetworkImage(
                   imageUrl: ctrl.albumList[index].image,
-
-                  // progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  //     CircularProgressIndicator(
-                  //         value: downloadProgress.progress),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
                   // placeholder: (context, url) => CircularProgressIndicator(),
                   fit: BoxFit.cover,
                 ),
