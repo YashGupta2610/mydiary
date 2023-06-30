@@ -53,19 +53,24 @@ class NotesPage extends StatelessWidget {
 
   Widget _noListItem() {
     return SliverFillRemaining(
+        child: Center(
+      child: SingleChildScrollView(
         child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          "assets/1.svg",
-          height: 300,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/1.svg",
+              height: 300,
+              placeholderBuilder: (context) => CircularProgressIndicator(),
+            ),
+            Text(
+              "Write your 💜 out boo boo ! ",
+              style: AppStyles.para,
+            ),
+          ],
         ),
-        Text(
-          "Write your 💜 out boo boo ! ",
-          style: AppStyles.para,
-        ),
-      ],
+      ),
     ));
   }
 
@@ -98,13 +103,15 @@ class NotesPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () {
-                          ctrl.deleteNote(ctrl.notesList[index]);
-                        },
-                        icon: Icon(
-                          Icons.delete_outline_outlined,
-                          size: 20,
-                        )),
+                      onPressed: () {
+                        ctrl.deleteNote(ctrl.notesList[index]);
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        size: 20,
+                        // color: Colors.,
+                      ),
+                    ),
                     Text(
                       ctrl.notesList[index].notesTitle,
                       maxLines: 1,

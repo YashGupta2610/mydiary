@@ -6,6 +6,7 @@ class AlbumController extends GetxController {
   static AlbumController to = Get.find();
 
   final db = FirebaseFirestore.instance;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -14,11 +15,14 @@ class AlbumController extends GetxController {
     super.onInit();
   }
 
-  late List<AlbumModel> albumList;
+  List<AlbumModel> albumList = [];
 
   void getAlbum() async {
+    isLoading.value = true;
     final snapshot = await db.collection("album").get();
     albumList =
         snapshot.docs.map((doc) => AlbumModel.fromSnapshot(doc)).toList();
+    isLoading.value = false;
+    update();
   }
 }

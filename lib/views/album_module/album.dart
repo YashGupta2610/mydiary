@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_diary/controller/album_controller.dart';
 import 'package:my_diary/utils/appstyle.dart';
+import 'package:my_diary/utils/loadingOverlay.dart';
 
 class AlbumPage extends StatelessWidget {
   const AlbumPage({super.key});
@@ -11,23 +12,26 @@ class AlbumPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(child: GetBuilder<AlbumController>(builder: (ctrl) {
       return Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: Text(
-                "Happy Birthday🎉",
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.clip,
-                style: AppStyles.heading,
+        body: LoadingOverlay(
+          isLoading: ctrl.isLoading.value,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Text(
+                  "Happy Birthday🎉",
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
+                  style: AppStyles.heading,
+                ),
               ),
-            ),
-            SliverList.builder(
-                itemCount: ctrl.albumList.length,
-                itemBuilder: (context, index) {
-                  return listBody(context, index);
-                })
-          ],
+              SliverList.builder(
+                  itemCount: ctrl.albumList.length,
+                  itemBuilder: (context, index) {
+                    return listBody(context, index);
+                  })
+            ],
+          ),
         ),
       );
     }));
